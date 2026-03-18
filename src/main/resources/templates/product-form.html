@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<head>
+<meta charset="UTF-8">
+<title>Product Form</title>
+
+<style>
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(120deg,#89f7fe,#66a6ff);
+}
+
+.container{
+    width:500px;
+    margin:100px auto;
+    padding:25px;
+    background:white;
+    box-shadow:0px 0px 10px black;
+    border-radius:10px;
+}
+
+h3{
+    text-align:center;
+}
+
+/* Table */
+
+table{
+    width:100%;
+}
+
+td{
+    padding:8px;
+}
+
+/* Inputs */
+
+input[type="text"],
+input[type="number"],
+select{
+    width:100%;
+    padding:8px;
+    border:1px solid gray;
+    border-radius:5px;
+}
+
+/* Error Message */
+
+.error{
+    color:#d93025;
+    font-size:13px;
+    background:#ffe6e6;
+    padding:4px 8px;
+    border-radius:4px;
+    margin-top:4px;
+    display:block;
+}
+
+/* Button */
+
+input[type="submit"]{
+    width:100%;
+    padding:10px;
+    margin-top:20px;
+    background:#007BFF;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+input[type="submit"]:hover{
+    background:#0056b3;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<a th:href="@{/products}" class="btn btn-success">All Products</a>
+
+<h3>Product Form</h3>
+
+<form th:action="@{save}" th:object="${product}" method="post">
+
+<table>
+
+<tr>
+<td>Product Name :</td>
+<td>
+<input type="text" placeholder="Enter Product Name" th:field="*{name}">
+<span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+</td>
+</tr>
+
+<tr>
+<td>Product Price :</td>
+<td>
+<input type="number" placeholder="Enter Product Price" th:field="*{price}">
+<span class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+</td>
+</tr>
+
+<tr>
+<td>Product Category :</td>
+<td>
+<select th:field="*{category}">
+<option value="">Select</option>
+<option value="Electronic">Electronic</option>
+<option value="Clothes">Clothes</option>
+<option value="Grocery">Grocery</option>
+<option value="Stationary">Stationary</option>
+<option value="Other">Other</option>
+</select>
+<span class="error" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+</td>
+</tr>
+
+<tr>
+<td>Product Qty :</td>
+<td>
+<input type="number" placeholder="Enter Product Qty" th:field="*{qty}">
+<span class="error" th:if="${#fields.hasErrors('qty')}" th:errors="*{qty}"></span>
+</td>
+</tr>
+
+</table>
+
+<input type="submit" value="Save Product">
+
+</form>
+
+</div>
+
+</body>
+</html>
